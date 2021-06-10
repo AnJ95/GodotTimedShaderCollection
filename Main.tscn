@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://shaders/gradientBlink.shader" type="Shader" id=4]
 [ext_resource path="res://Ease/EaseManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://shaders/beamVertical.shader" type="Shader" id=6]
+[ext_resource path="res://assets/backgroundColorForest.png" type="Texture" id=7]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
@@ -33,6 +34,12 @@ shader_param/fade_alpha = 0.0
 script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 512, 310 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 4100.56, 0, 1024, 150 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -62,9 +69,8 @@ material = SubResource( 3 )
 shader_uniforms = [ "period,0.1,0.1,5,1" ]
 
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" instance=ExtResource( 1 )]
-position = Vector2( 115, 70 )
+position = Vector2( 115, 85 )
 scale = Vector2( 0.4, 0.4 )
-frame = 43
 
 [node name="ShaderManager2" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
 material = SubResource( 4 )
@@ -73,6 +79,5 @@ margin_right = 483.0
 shader_uniforms = [ "movement_y,0,1,500,100", "scale_x,0,0.1,1,0.9", "fade_alpha,0,0.1,1,0.2" ]
 
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" instance=ExtResource( 1 )]
-position = Vector2( 115, 70 )
+position = Vector2( 115, 85 )
 scale = Vector2( 0.4, 0.4 )
-frame = 43
