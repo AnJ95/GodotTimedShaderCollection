@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Ease/EaseSelect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ease/EaseManager.gd" type="Script" id=2]
+
+[node name="EaseManager" type="PanelContainer" groups=[
+"EaseManager",
+]]
+anchor_right = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 223.0
+
+[node name="EaseSelectAttack" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_right = 249.0
+duration = 0.4
+ease_type = 2
+transition_type = 7
+
+[node name="EaseSelectSustain" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 253.0
+margin_right = 503.0
+duration = 0.2
+make_constant = true
+constant_value = 1.0
+
+[node name="EaseSelectDecay" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 507.0
+margin_right = 756.0
+duration = 0.4
+ease_type = 2
+transition_type = 1
+invert_y = true
+
+[node name="EaseSelectBreak" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 760.0
+margin_right = 1010.0
+make_constant = true
