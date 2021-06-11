@@ -31,7 +31,7 @@ func _set_shader_uniforms(v):
 		slider.max_value = float(uniform_info[3])
 		slider.value = float(uniform_info[4])
 		
-		label.rect_min_size.x = 80
+		label.rect_min_size.x = 65
 		slider.rect_min_size.x = 140
 		
 		hboxcontainer.add_child(label)
@@ -40,6 +40,7 @@ func _set_shader_uniforms(v):
 		container.add_child(hboxcontainer)
 		
 		slider.connect("value_changed", self, "_on_shader_uniform_changed", [uniform_info[0]])
+		_on_shader_uniform_changed(slider.value, uniform_info[0])
 
 func _ready():
 	_set_shader_uniforms(shader_uniforms)
