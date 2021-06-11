@@ -22,25 +22,29 @@ func _set_shader_uniforms(v):
 		var uniform_info = uniform_str.split(",")
 		
 		var hboxcontainer = HBoxContainer.new()
-		var label = Label.new()
+		var lblTitle = Label.new()
 		var slider = HSlider.new()
+		var lblValue = Label.new()
 		
-		label.text = uniform_info[0]
+		lblTitle.text = uniform_info[0]
 		slider.min_value = float(uniform_info[1])
 		slider.step = float(uniform_info[2])
 		slider.max_value = float(uniform_info[3])
 		slider.value = float(uniform_info[4])
+		lblValue.align = Label.ALIGN_RIGHT
 		
-		label.rect_min_size.x = 65
+		lblTitle.rect_min_size.x = 65
 		slider.rect_min_size.x = 140
+		lblValue.rect_min_size.x = 40
 		
-		hboxcontainer.add_child(label)
+		hboxcontainer.add_child(lblTitle)
 		hboxcontainer.add_child(slider)
+		hboxcontainer.add_child(lblValue)
 		
 		container.add_child(hboxcontainer)
 		
-		slider.connect("value_changed", self, "_on_shader_uniform_changed", [uniform_info[0]])
-		_on_shader_uniform_changed(slider.value, uniform_info[0])
+		slider.connect("value_changed", self, "_on_shader_uniform_changed", [uniform_info[0], lblValue])
+		_on_shader_uniform_changed(slider.value, uniform_info[0], lblValue)
 
 func _ready():
 	_set_shader_uniforms(shader_uniforms)
@@ -49,5 +53,6 @@ func _process(delta):
 	if ease_manager and set_uniform_from_ease_manager:
 		material.set_shader_param(ease_manager_uniform, ease_manager.get_cur_value())
 	
-func _on_shader_uniform_changed(value, uniform:String):
+func _on_shader_uniform_changed(value, uniform:String, lblValue:Label):
 	material.set_shader_param(uniform, value)
+	lblValue.text = str(value)
