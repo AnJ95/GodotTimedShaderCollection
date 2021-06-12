@@ -2,9 +2,10 @@ tool
 extends PanelContainer
 
 signal play_shaders()
-signal ease_manager_changed(texture, duration, loop)
+signal ease_manager_changed(texture, duration)
 
 export(bool) var loop = true
+export(bool) var filter = true
 export(int, 2, 2048) var texture_resolution = 100
 
 onready var ease_selects = [
@@ -14,7 +15,7 @@ onready var ease_selects = [
 	$HBoxContainer/EaseSelectBreak
 ]
 onready var textRect = $HBoxContainer/VBoxContainer/TextureRect
-onready var btnPlay = $HBoxContainer/VBoxContainer/HBoxContainer3/BtnPlay
+onready var btnPlay = $HBoxContainer/VBoxContainer/HBoxContainer4/BtnPlay
 onready var rollover = ProjectSettings.get_setting("rendering/limits/time/time_rollover_secs")
 
 var time_offset = 0
@@ -28,6 +29,7 @@ var time_sum = 0
 func _ready():
 	$HBoxContainer/VBoxContainer/HBoxContainer/SpinBoxTextRes.value = texture_resolution
 	$HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer/CbxLoop.pressed = loop
+	$HBoxContainer/VBoxContainer/HBoxContainer3/HBoxContainer/CbxFilter.pressed = filter
 	_on_ease_select_changed()
 	
 func _process(delta):
@@ -60,6 +62,21 @@ func _on_ease_select_changed():
 		times.append(ease_select.duration)
 		time_sum += ease_select.duration
 	
+	update_texture()
+
+func _on_SpinBoxTextRes_value_changed(value):
+	texture_resolution = value
+	update_texture()
+
+func _on_CbxLoop_toggled(button_pressed):
+	loop = button_pressed
+	btnPlay.text = "Reset" if loop else "Play"
+	update_texture()
+func _on_CbxFilter_toggled(button_pressed):
+	filter = button_pressed
+	update_texture()
+	
+func update_texture():
 	# Create and customize image
 	texture = ImageTexture.new()
 	var image = Image.new()
@@ -74,20 +91,17 @@ func _on_ease_select_changed():
 		image.set_pixel(i, 0, Color(v, 0, 0))
 	image.unlock()
 	
-	# Display it
+	# Set flags
 	texture.create_from_image(image)
+	var flags = 0
+	if loop: flags |= Texture.FLAG_REPEAT
+	if filter: flags |= Texture.FLAG_FILTER
+	texture.flags = flags
+	
+	# Display it
 	textRect.texture = texture
 	
 	# Notify
-	emit()
-
-func _on_SpinBoxTextRes_value_changed(value):
-	texture_resolution = value
-	_on_ease_select_changed()
-
-func _on_CbxLoop_toggled(button_pressed):
-	loop = button_pressed
-	btnPlay.text = "Reset" if loop else "Play"
 	emit()
 
 func _on_BtnPlay_pressed():
@@ -95,4 +109,4 @@ func _on_BtnPlay_pressed():
 	emit_signal("play_shaders")
 
 func emit():
-	emit_signal("ease_manager_changed", texture, time_sum, loop)
+	emit_signal("ease_manager_changed", texture, time_sum)

@@ -50,10 +50,9 @@ func _on_shader_uniform_changed(value, uniform:String, lblValue:Label):
 	material.set_shader_param(uniform, value)
 	lblValue.text = str(value)
 
-func _on_ease_manager_changed(texture, duration, loop):
+func _on_ease_manager_changed(texture, duration):
 	material.set_shader_param("intensity_texture", texture)
 	material.set_shader_param("intensity_duration", duration)
-	material.set_shader_param("intensity_loop", loop)
 
 func _on_play_shader():
 	# Get absolute time since Engine start

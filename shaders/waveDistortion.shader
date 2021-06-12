@@ -5,7 +5,6 @@ const float PI2 = 6.2831853072;
 // time-dependant intensity supplied by EaseManager
 uniform sampler2D intensity_texture;
 uniform float intensity_duration;
-uniform bool intensity_loop;
 uniform float intensity_time_offset;
 varying float intensity;
 
@@ -20,7 +19,6 @@ varying vec2 v;
 void vertex() {
 	v = VERTEX;
 	float t = (TIME - intensity_time_offset) / intensity_duration;
-	t = intensity_loop ? mod(t, 1.0) : min(t, 1.0);
 	intensity = texture(intensity_texture, vec2(t, 0)).r;
 }
 

@@ -3,18 +3,20 @@
 [ext_resource path="res://Ease/EaseSelect.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Ease/EaseManager.gd" type="Script" id=2]
 
-[sub_resource type="Image" id=3]
+[sub_resource type="Image" id=1]
 data = {
-"data": PoolByteArray( 91, 26, 63, 56, 63, 62, 161, 58, 192, 159, 186, 59, 41, 6, 128, 60, 132, 12, 8, 61, 133, 101, 120, 61, 167, 1, 205, 61, 202, 118, 29, 62, 142, 56, 101, 62, 187, 1, 160, 62, 101, 10, 216, 62, 158, 249, 12, 63, 0, 64, 42, 63, 236, 20, 66, 63, 181, 7, 85, 63, 176, 167, 99, 63, 48, 132, 110, 63, 139, 44, 118, 63, 19, 48, 123, 63, 28, 30, 126, 63, 250, 133, 127, 63, 0, 247, 127, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 232, 246, 127, 63, 80, 67, 126, 63, 202, 10, 122, 63, 226, 98, 115, 63, 152, 109, 106, 63, 176, 88, 95, 63, 195, 92, 82, 63, 36, 188, 67, 63, 136, 193, 51, 63, 143, 190, 34, 63, 31, 10, 17, 63, 72, 253, 253, 62, 154, 240, 217, 62, 84, 166, 182, 62, 182, 210, 148, 62, 28, 69, 106, 62, 96, 111, 48, 62, 104, 151, 250, 61, 128, 190, 163, 61, 96, 31, 60, 61, 192, 187, 171, 60, 128, 21, 182, 59, 0, 0, 129, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"data": PoolByteArray( 0, 64, 54, 57, 0, 198, 153, 59, 128, 250, 177, 60, 192, 47, 116, 61, 16, 191, 1, 62, 172, 227, 108, 62, 104, 130, 195, 62, 92, 223, 19, 63, 36, 78, 61, 63, 76, 132, 90, 63, 148, 164, 109, 63, 188, 209, 120, 63, 132, 46, 126, 63, 172, 221, 127, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 204, 233, 127, 63, 226, 197, 123, 63, 45, 158, 113, 63, 0, 241, 97, 63, 99, 129, 77, 63, 144, 77, 53, 63, 160, 130, 26, 63, 196, 219, 252, 62, 96, 217, 196, 62, 216, 182, 143, 62, 108, 18, 64, 62, 104, 134, 224, 61, 192, 131, 79, 61, 0, 173, 93, 60, 0, 0, 30, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "RFloat",
 "height": 1,
 "mipmaps": false,
-"width": 100
+"width": 64
 }
 
 [sub_resource type="ImageTexture" id=2]
-image = SubResource( 3 )
-size = Vector2( 100, 1 )
+flags = 6
+flags = 6
+image = SubResource( 1 )
+size = Vector2( 64, 1 )
 
 [node name="EaseManager" type="PanelContainer" groups=[
 "EaseManager",
@@ -24,6 +26,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+texture_resolution = 64.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
@@ -87,7 +90,7 @@ margin_right = 198.0
 margin_bottom = 24.0
 min_value = 2.0
 max_value = 2048.0
-value = 100.0
+value = 64.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 40.0
@@ -117,10 +120,35 @@ pressed = true
 [node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 68.0
 margin_right = 198.0
-margin_bottom = 88.0
+margin_bottom = 92.0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 120.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 120, 0 )
+text = "Filter"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 124.0
+margin_right = 198.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
 alignment = 1
 
-[node name="BtnPlay" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="CbxFilter" type="CheckBox" parent="HBoxContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+margin_left = 25.0
+margin_right = 49.0
+margin_bottom = 24.0
+pressed = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 96.0
+margin_right = 198.0
+margin_bottom = 116.0
+alignment = 1
+
+[node name="BtnPlay" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer4"]
 margin_left = 75.0
 margin_right = 123.0
 margin_bottom = 20.0
@@ -131,4 +159,5 @@ text = "Reset"
 [connection signal="ease_select_changed" from="HBoxContainer/EaseSelectBreak" to="." method="_on_ease_select_changed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/HBoxContainer/SpinBoxTextRes" to="." method="_on_SpinBoxTextRes_value_changed"]
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer/CbxLoop" to="." method="_on_CbxLoop_toggled"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer3/BtnPlay" to="." method="_on_BtnPlay_pressed"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/HBoxContainer3/HBoxContainer/CbxFilter" to="." method="_on_CbxFilter_toggled"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer4/BtnPlay" to="." method="_on_BtnPlay_pressed"]

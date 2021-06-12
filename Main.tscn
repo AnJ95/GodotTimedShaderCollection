@@ -73,7 +73,7 @@ script = ExtResource( 2 )
 position = Vector2( 512, 310 )
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 62495.7, 0, 1024, 150 )
+region_rect = Rect2( 64203.5, 0, 1024, 150 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -106,7 +106,6 @@ shader_uniforms = [ "period,0.1,0.1,5,1" ]
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" instance=ExtResource( 1 )]
 position = Vector2( 115, 85 )
 scale = Vector2( 0.4, 0.4 )
-frame = 6
 
 [node name="ShaderManager2" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
 material = SubResource( 6 )
@@ -117,7 +116,6 @@ shader_uniforms = [ "move_y,0,1,500,100", "scale_x,0,0.1,1,1", "fade,0,0.1,1,0.5
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" instance=ExtResource( 1 )]
 position = Vector2( 115, 85 )
 scale = Vector2( 0.4, 0.4 )
-frame = 6
 
 [node name="ShaderManager3" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
 material = SubResource( 7 )
@@ -128,10 +126,9 @@ shader_uniforms = [ "ampl_0,0,1,100,0", "ampl_1,0,1,100,12", "period_0,1,1,200,8
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" instance=ExtResource( 1 )]
 position = Vector2( 115, 85 )
 scale = Vector2( 0.4, 0.4 )
-frame = 6
-[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" method="_on_ease_manager_changed"]
 [connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" method="_on_ease_manager_changed"]
+[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" method="_on_ease_manager_changed"]
 [connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" method="_on_ease_manager_changed"]
-[connection signal="play_shaders" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" method="_on_play_shader"]
 [connection signal="play_shaders" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" method="_on_play_shader"]
+[connection signal="play_shaders" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" method="_on_play_shader"]
 [connection signal="play_shaders" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" method="_on_play_shader"]
