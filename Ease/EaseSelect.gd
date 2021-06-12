@@ -8,6 +8,8 @@ enum TransitionType {
 	TRANS_LINEAR, TRANS_SINE, TRANS_QUINT, TRANS_QUART, TRANS_QUAD, TRANS_EXPO, TRANS_ELASTIC, TRANS_CUBIC, TRANS_CIRC, TRANS_BOUNCE, TRANS_BACK
 }
 
+signal ease_select_changed
+
 export(float) var duration = 0.3
 
 export(EaseType) var ease_type = 0
@@ -92,16 +94,21 @@ func hide_knob():
 func _on_SpinBoxDuration_value_changed(value):
 	duration = value
 	update_view()
-	
+	emit()
 	
 func _on_BtnOptionEase_item_selected(index):
 	ease_type = index
 	update_view()
+	emit()
 	
 func _on_BtnOptionTransition_item_selected(index):
 	transition_type = index
 	update_view()
+	emit()
 
 func _on_ColorRectInner_resized():
 	if !tween: return
 	update_view()
+	
+func emit():
+	emit_signal("ease_select_changed")
