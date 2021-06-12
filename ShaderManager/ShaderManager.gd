@@ -51,6 +51,18 @@ func _on_shader_uniform_changed(value, uniform:String, lblValue:Label):
 	material.set_shader_param(uniform, value)
 	lblValue.text = str(value)
 
-func _on_ease_manager_changed(texture, duration):
+func _on_ease_manager_changed(texture, duration, loop):
 	material.set_shader_param("intensity_texture", texture)
 	material.set_shader_param("intensity_duration", duration)
+	material.set_shader_param("intensity_loop", loop)
+
+func _on_play_shader():
+	# Get absolute time since Engine start
+	# taking TIME rollover into account
+	# https://docs.godotengine.org/en/3.3/tutorials/shading/shading_reference/canvas_item_shader.html#global-built-ins
+	var rollover = ProjectSettings.get_setting("rendering/limits/time/time_rollover_secs")
+	var time = fmod(OS.get_ticks_msec() / 1000.0, rollover)
+	
+	material.set_shader_param("intensity_time_offset", time)
+	
+	

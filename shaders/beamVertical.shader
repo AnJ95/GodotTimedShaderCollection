@@ -3,6 +3,8 @@ shader_type canvas_item;
 // time-dependant intensity supplied by EaseManager
 uniform sampler2D intensity_texture;
 uniform float intensity_duration;
+uniform bool intensity_loop;
+uniform float intensity_time_offset;
 varying float intensity;
 
 uniform float move_y = 100.0;
@@ -11,7 +13,8 @@ uniform float fade = 0.0;
 
 
 void vertex() {
-	float t = mod(TIME, intensity_duration) / intensity_duration;
+	float t = (TIME - intensity_time_offset) / intensity_duration;
+	t = intensity_loop ? mod(t, 1.0) : min(t, 1.0);
 	intensity = texture(intensity_texture, vec2(t, 0)).r;
 	
 	VERTEX.x *= mix(1.0, 1.0 - intensity, scale_x);

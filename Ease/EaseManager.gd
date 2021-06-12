@@ -1,8 +1,10 @@
 tool
 extends PanelContainer
 
-signal ease_manager_changed(texture, duration)
+signal play_shaders()
+signal ease_manager_changed(texture, duration, loop)
 
+export(bool) var loop = true
 export(int, 2, 2048) var texture_resolution = 100
 
 onready var ease_selects = [
@@ -12,24 +14,31 @@ onready var ease_selects = [
 	$HBoxContainer/EaseSelectBreak
 ]
 onready var textRect = $HBoxContainer/VBoxContainer/TextureRect
+onready var btnPlay = $HBoxContainer/VBoxContainer/HBoxContainer3/BtnPlay
+onready var rollover = ProjectSettings.get_setting("rendering/limits/time/time_rollover_secs")
 
-var cur_time = 0
+var time_offset = 0
+
 var cur_value = 0
 
+var texture
 var times = []
 var time_sum = 0
 
 func _ready():
 	$HBoxContainer/VBoxContainer/HBoxContainer/SpinBoxTextRes.value = texture_resolution
+	$HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer/CbxLoop.pressed = loop
 	_on_ease_select_changed()
 	
 func _process(delta):
 	if !ease_selects: return
 	
-	cur_time = fmod(cur_time + delta, time_sum)
+	var abs_time = fmod(OS.get_ticks_msec() / 1000.0, rollover) - time_offset
+	var rel_time = fmod(abs_time, time_sum) if loop else min(abs_time, time_sum)
+	
 	for ease_select in ease_selects:
 		ease_select.hide_knob()
-	cur_value = get_value_at(cur_time)
+	cur_value = get_value_at(rel_time)
 
 func get_value_at(rel_time):
 	for i in range(times.size()):
@@ -52,7 +61,7 @@ func _on_ease_select_changed():
 		time_sum += ease_select.duration
 	
 	# Create and customize image
-	var texture = ImageTexture.new()
+	texture = ImageTexture.new()
 	var image = Image.new()
 	image.create(texture_resolution, 1, false, Image.FORMAT_RF)
 	
@@ -70,8 +79,20 @@ func _on_ease_select_changed():
 	textRect.texture = texture
 	
 	# Notify
-	emit_signal("ease_manager_changed", texture, time_sum)
+	emit()
 
 func _on_SpinBoxTextRes_value_changed(value):
 	texture_resolution = value
 	_on_ease_select_changed()
+
+func _on_CbxLoop_toggled(button_pressed):
+	loop = button_pressed
+	btnPlay.text = "Reset" if loop else "Play"
+	emit()
+
+func _on_BtnPlay_pressed():
+	time_offset = fmod(OS.get_ticks_msec() / 1000.0, rollover)
+	emit_signal("play_shaders")
+
+func emit():
+	emit_signal("ease_manager_changed", texture, time_sum, loop)
