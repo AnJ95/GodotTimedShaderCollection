@@ -1,17 +1,19 @@
 tool
 extends Control
 
-onready var ease_manager = get_tree().get_nodes_in_group("EaseManager")[0]
-
 export (Array, String) var shader_uniforms = ["period,0.1,0.05,1,0.5"] setget _set_shader_uniforms
 
+func _ready():
+	_set_shader_uniforms(shader_uniforms)
+	material.set_shader_param("intensity_time_offset", 0)
+	
 func _set_shader_uniforms(v):
 	shader_uniforms = v
 	
 	if not has_node("PanelContainer/VBoxContainer"):
 		return
 		
-	var container:Control = $PanelContainer/VBoxContainer
+	var container:Control = $PanelContainer/VBoxContainer/VBoxContainer
 	
 	for child in container.get_children():
 		child.queue_free()
@@ -33,7 +35,7 @@ func _set_shader_uniforms(v):
 		
 		lblTitle.rect_min_size.x = 65
 		slider.rect_min_size.x = 140
-		lblValue.rect_min_size.x = 40
+		lblValue.rect_min_size.x = 34
 		
 		hboxcontainer.add_child(lblTitle)
 		hboxcontainer.add_child(slider)
@@ -43,9 +45,6 @@ func _set_shader_uniforms(v):
 		
 		slider.connect("value_changed", self, "_on_shader_uniform_changed", [uniform_info[0], lblValue])
 		_on_shader_uniform_changed(slider.value, uniform_info[0], lblValue)
-
-func _ready():
-	_set_shader_uniforms(shader_uniforms)
 
 func _on_shader_uniform_changed(value, uniform:String, lblValue:Label):
 	material.set_shader_param(uniform, value)
@@ -64,5 +63,20 @@ func _on_play_shader():
 	var time = fmod(OS.get_ticks_msec() / 1000.0, rollover)
 	
 	material.set_shader_param("intensity_time_offset", time)
+
+func _on_BtnSaveMaterial_pressed():
+	var fd:FileDialog = FileDialog.new()
+	fd.mode = FileDialog.MODE_SAVE_FILE
+	fd.filters = PoolStringArray(["*.tres ; Material Resource"])
+	fd.current_file = "shader.tres"
+	fd.mode_overrides_title = false
+	fd.window_title = "Save shader material"
 	
+	add_child(fd)
+	fd.popup_centered_ratio(0.75)
+	fd.connect("file_selected", self, "_on_save_material_file_selected")
 	
+func _on_save_material_file_selected(path):
+	var flags = ResourceSaver.FLAG_BUNDLE_RESOURCES | ResourceSaver.FLAG_CHANGE_PATH
+	if ResourceSaver.save(path, material, flags) != OK:
+		printerr("Could not save the material!")
