@@ -1,6 +1,8 @@
 tool
 extends PanelContainer
 
+signal ease_manager_changed(texture, duration)
+
 export(int, 2, 2048) var texture_resolution = 100
 
 onready var ease_selects = [
@@ -66,6 +68,9 @@ func _on_ease_select_changed():
 	# Display it
 	texture.create_from_image(image)
 	textRect.texture = texture
+	
+	# Notify
+	emit_signal("ease_manager_changed", texture, time_sum)
 
 func _on_SpinBoxTextRes_value_changed(value):
 	texture_resolution = value

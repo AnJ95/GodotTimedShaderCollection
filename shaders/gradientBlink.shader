@@ -1,9 +1,17 @@
 shader_type canvas_item;
 
-uniform float intensity = 0.5;
+// time-dependant intensity supplied by EaseManager
+uniform sampler2D intensity_texture;
+uniform float intensity_duration;
+varying float intensity;
+
 uniform float period = 1.0;
 uniform sampler2D gradient: hint_black;
 
+void vertex() {
+	float t = mod(TIME, intensity_duration) / intensity_duration;
+	intensity = texture(intensity_texture, vec2(t, 0)).r;
+}
 
 void fragment() {
 	vec4 col_in = texture(TEXTURE, UV);

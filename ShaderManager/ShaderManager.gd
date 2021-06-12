@@ -3,8 +3,6 @@ extends Control
 
 onready var ease_manager = get_tree().get_nodes_in_group("EaseManager")[0]
 
-export (bool) var set_uniform_from_ease_manager = true
-export (String) var ease_manager_uniform = "intensity"
 export (Array, String) var shader_uniforms = ["period,0.1,0.05,1,0.5"] setget _set_shader_uniforms
 
 func _set_shader_uniforms(v):
@@ -49,10 +47,10 @@ func _set_shader_uniforms(v):
 func _ready():
 	_set_shader_uniforms(shader_uniforms)
 
-func _process(delta):
-	if ease_manager and set_uniform_from_ease_manager:
-		material.set_shader_param(ease_manager_uniform, ease_manager.get_cur_value())
-	
 func _on_shader_uniform_changed(value, uniform:String, lblValue:Label):
 	material.set_shader_param(uniform, value)
 	lblValue.text = str(value)
+
+func _on_ease_manager_changed(texture, duration):
+	material.set_shader_param("intensity_texture", texture)
+	material.set_shader_param("intensity_duration", duration)

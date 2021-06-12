@@ -19,14 +19,14 @@ gradient = SubResource( 1 )
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
-shader_param/intensity = 1.0
+shader_param/intensity = 0.0
 shader_param/period = 1.0
 shader_param/gradient = SubResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = ExtResource( 6 )
-shader_param/intensity = 1.0
+shader_param/intensity_duration = null
 shader_param/move_y = 100.0
 shader_param/scale_x = 1.0
 shader_param/fade = 0.5
@@ -34,7 +34,7 @@ shader_param/fade = 0.5
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
 shader = ExtResource( 8 )
-shader_param/intensity = 1.0
+shader_param/intensity = 0.0
 shader_param/ampl_0 = 0.0
 shader_param/ampl_1 = 12.0
 shader_param/period_0 = 80.0
@@ -51,7 +51,7 @@ script = ExtResource( 2 )
 position = Vector2( 512, 310 )
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 39852, 0, 1024, 150 )
+region_rect = Rect2( 47948.1, 0, 1024, 150 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -72,12 +72,13 @@ margin_bottom = 600.0
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/ScrollContainer"]
-margin_right = 722.0
+margin_right = 809.0
 margin_bottom = 366.0
 size_flags_vertical = 3
 
 [node name="ShaderManager" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
 material = SubResource( 3 )
+margin_right = 267.0
 shader_uniforms = [ "period,0.1,0.1,5,1" ]
 
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" instance=ExtResource( 1 )]
@@ -87,8 +88,8 @@ frame = 2
 
 [node name="ShaderManager2" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
 material = SubResource( 4 )
-margin_left = 242.0
-margin_right = 480.0
+margin_left = 271.0
+margin_right = 538.0
 shader_uniforms = [ "move_y,0,1,500,100", "scale_x,0,0.1,1,1", "fade,0,0.1,1,0.5" ]
 
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" instance=ExtResource( 1 )]
@@ -98,11 +99,14 @@ frame = 2
 
 [node name="ShaderManager3" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
 material = SubResource( 5 )
-margin_left = 484.0
-margin_right = 722.0
+margin_left = 542.0
+margin_right = 809.0
 shader_uniforms = [ "ampl_0,0,1,100,0", "ampl_1,0,1,100,12", "period_0,1,1,200,80", "period_1,1,1,200,30", "time_flow,0,0.25,5,2", "offset,0,0.1,1,0" ]
 
 [node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" instance=ExtResource( 1 )]
 position = Vector2( 115, 85 )
 scale = Vector2( 0.4, 0.4 )
 frame = 2
+[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" method="_on_ease_manager_changed"]
+[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" method="_on_ease_manager_changed"]
+[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" method="_on_ease_manager_changed"]
