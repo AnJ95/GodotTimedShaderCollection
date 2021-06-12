@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Ease/EaseSelect.gd" type="Script" id=1]
+
+[node name="EaseSelect" type="VBoxContainer" groups=[
+"EaseSelect",
+]]
+margin_right = 188.0
+margin_bottom = 216.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+duration = 0.8
+
+[node name="ColorRectOuter" type="ColorRect" parent="."]
+margin_right = 188.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 131, 140 )
+color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+
+[node name="ColorRectInner" type="ColorRect" parent="ColorRectOuter"]
+anchor_right = 1.0
+margin_top = 30.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 80 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="ColorRectOuter/ColorRectInner"]
+points = PoolVector2Array( 0, 80, 1.89899, 79.1919, 3.79798, 78.3838, 5.69697, 77.5758, 7.59596, 76.7677, 9.49495, 75.9596, 11.3939, 75.1515, 13.2929, 74.3434, 15.1919, 73.5354, 17.0909, 72.7273, 18.9899, 71.9192, 20.8889, 71.1111, 22.7879, 70.303, 24.6869, 69.4949, 26.5859, 68.6869, 28.4848, 67.8788, 30.3838, 67.0707, 32.2828, 66.2626, 34.1818, 65.4545, 36.0808, 64.6465, 37.9798, 63.8384, 39.8788, 63.0303, 41.7778, 62.2222, 43.6768, 61.4141, 45.5758, 60.6061, 47.4747, 59.798, 49.3737, 58.9899, 51.2727, 58.1818, 53.1717, 57.3737, 55.0707, 56.5657, 56.9697, 55.7576, 58.8687, 54.9495, 60.7677, 54.1414, 62.6667, 53.3333, 64.5657, 52.5253, 66.4646, 51.7172, 68.3636, 50.9091, 70.2626, 50.101, 72.1616, 49.2929, 74.0606, 48.4848, 75.9596, 47.6768, 77.8586, 46.8687, 79.7576, 46.0606, 81.6566, 45.2525, 83.5556, 44.4444, 85.4545, 43.6364, 87.3535, 42.8283, 89.2525, 42.0202, 91.1515, 41.2121, 93.0505, 40.404, 94.9495, 39.596, 96.8485, 38.7879, 98.7475, 37.9798, 100.646, 37.1717, 102.545, 36.3636, 104.444, 35.5556, 106.343, 34.7475, 108.242, 33.9394, 110.141, 33.1313, 112.04, 32.3232, 113.939, 31.5152, 115.838, 30.7071, 117.737, 29.899, 119.636, 29.0909, 121.535, 28.2828, 123.434, 27.4747, 125.333, 26.6667, 127.232, 25.8586, 129.131, 25.0505, 131.03, 24.2424, 132.929, 23.4343, 134.828, 22.6263, 136.727, 21.8182, 138.626, 21.0101, 140.525, 20.202, 142.424, 19.3939, 144.323, 18.5859, 146.222, 17.7778, 148.121, 16.9697, 150.02, 16.1616, 151.919, 15.3535, 153.818, 14.5455, 155.717, 13.7374, 157.616, 12.9293, 159.515, 12.1212, 161.414, 11.3131, 163.313, 10.5051, 165.212, 9.69697, 167.111, 8.88889, 169.01, 8.08081, 170.909, 7.27273, 172.808, 6.46465, 174.707, 5.65657, 176.606, 4.84848, 178.505, 4.0404, 180.404, 3.23232, 182.303, 2.42424, 184.202, 1.61616, 186.101, 0.808082, 188, 0 )
+width = 1.5
+
+[node name="Knob" type="ColorRect" parent="ColorRectOuter/ColorRectInner"]
+margin_left = -5.0
+margin_top = 75.0
+margin_right = 5.0
+margin_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.592157, 0.00784314, 0.00784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinBoxDuration" type="SpinBox" parent="."]
+margin_top = 144.0
+margin_right = 188.0
+margin_bottom = 168.0
+max_value = 3.0
+step = 0.1
+value = 0.3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnOptionEase" type="OptionButton" parent="."]
+margin_top = 172.0
+margin_right = 188.0
+margin_bottom = 192.0
+text = "EASE_IN"
+items = [ "EASE_IN", null, false, 0, null, "EASE_OUT", null, false, 1, null, "EASE_IN_OUT", null, false, 2, null, "EASE_OUT_IN", null, false, 3, null ]
+selected = 0
+
+[node name="BtnOptionTransition" type="OptionButton" parent="."]
+margin_top = 196.0
+margin_right = 188.0
+margin_bottom = 216.0
+text = "TRANS_LINEAR"
+items = [ "TRANS_LINEAR", null, false, 0, null, "TRANS_SINE", null, false, 1, null, "TRANS_QUINT", null, false, 2, null, "TRANS_QUART", null, false, 3, null, "TRANS_QUAD", null, false, 4, null, "TRANS_EXPO", null, false, 5, null, "TRANS_ELASTIC", null, false, 6, null, "TRANS_CUBIC", null, false, 7, null, "TRANS_CIRC", null, false, 8, null, "TRANS_BOUNCE", null, false, 9, null, "TRANS_BACK", null, false, 10, null ]
+selected = 0
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="resized" from="ColorRectOuter/ColorRectInner" to="." method="_on_ColorRectInner_resized"]
+[connection signal="value_changed" from="SpinBoxDuration" to="." method="_on_SpinBoxDuration_value_changed"]
+[connection signal="item_selected" from="BtnOptionEase" to="." method="_on_BtnOptionEase_item_selected"]
+[connection signal="item_selected" from="BtnOptionTransition" to="." method="_on_BtnOptionTransition_item_selected"]

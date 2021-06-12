@@ -1,0 +1,134 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://ShaderManager/ShaderManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shaders/gradientBlink.shader" type="Shader" id=4]
+[ext_resource path="res://Ease/EaseManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://shaders/beamVertical.shader" type="Shader" id=6]
+[ext_resource path="res://assets/backgroundColorForest.png" type="Texture" id=7]
+[ext_resource path="res://shaders/waveDistortion.shader" type="Shader" id=8]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Image" id=3]
+data = {
+"data": PoolByteArray( 91, 26, 63, 56, 63, 62, 161, 58, 192, 159, 186, 59, 41, 6, 128, 60, 132, 12, 8, 61, 133, 101, 120, 61, 167, 1, 205, 61, 202, 118, 29, 62, 142, 56, 101, 62, 187, 1, 160, 62, 101, 10, 216, 62, 158, 249, 12, 63, 0, 64, 42, 63, 236, 20, 66, 63, 181, 7, 85, 63, 176, 167, 99, 63, 48, 132, 110, 63, 139, 44, 118, 63, 19, 48, 123, 63, 28, 30, 126, 63, 250, 133, 127, 63, 0, 247, 127, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 232, 246, 127, 63, 80, 67, 126, 63, 202, 10, 122, 63, 226, 98, 115, 63, 152, 109, 106, 63, 176, 88, 95, 63, 195, 92, 82, 63, 36, 188, 67, 63, 136, 193, 51, 63, 143, 190, 34, 63, 31, 10, 17, 63, 72, 253, 253, 62, 154, 240, 217, 62, 84, 166, 182, 62, 182, 210, 148, 62, 28, 69, 106, 62, 96, 111, 48, 62, 104, 151, 250, 61, 128, 190, 163, 61, 96, 31, 60, 61, 192, 187, 171, 60, 128, 21, 182, 59, 0, 0, 129, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "RFloat",
+"height": 1,
+"mipmaps": false,
+"width": 100
+}
+
+[sub_resource type="ImageTexture" id=4]
+image = SubResource( 3 )
+size = Vector2( 100, 1 )
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/intensity_duration = 1.8
+shader_param/intensity_loop = true
+shader_param/intensity_time_offset = 0
+shader_param/period = 1.0
+shader_param/intensity_texture = SubResource( 4 )
+shader_param/gradient = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/intensity_duration = 1.8
+shader_param/intensity_loop = true
+shader_param/intensity_time_offset = 0
+shader_param/move_y = 100.0
+shader_param/scale_x = 1.0
+shader_param/fade = 0.5
+shader_param/intensity_texture = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 8 )
+shader_param/intensity_duration = 1.8
+shader_param/intensity_loop = true
+shader_param/intensity_time_offset = 0
+shader_param/ampl_0 = 0.0
+shader_param/ampl_1 = 12.0
+shader_param/period_0 = 80.0
+shader_param/period_1 = 30.0
+shader_param/time_flow = 2.0
+shader_param/offset = 0.0
+shader_param/intensity_texture = SubResource( 4 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 512, 310 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 64203.5, 0, 1024, 150 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EaseManager" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+margin_right = 1024.0
+margin_bottom = 230.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/VBoxContainer"]
+margin_top = 234.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/ScrollContainer"]
+margin_right = 791.0
+margin_bottom = 366.0
+size_flags_vertical = 3
+
+[node name="ShaderManager" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
+material = SubResource( 5 )
+margin_right = 261.0
+shader_uniforms = [ "period,0.1,0.1,5,1" ]
+
+[node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" instance=ExtResource( 1 )]
+position = Vector2( 115, 85 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="ShaderManager2" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
+material = SubResource( 6 )
+margin_left = 265.0
+margin_right = 526.0
+shader_uniforms = [ "move_y,0,1,500,100", "scale_x,0,0.1,1,1", "fade,0,0.1,1,0.5" ]
+
+[node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" instance=ExtResource( 1 )]
+position = Vector2( 115, 85 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="ShaderManager3" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 3 )]
+material = SubResource( 7 )
+margin_left = 530.0
+margin_right = 791.0
+shader_uniforms = [ "ampl_0,0,1,100,0", "ampl_1,0,1,100,12", "period_0,1,1,200,80", "period_1,1,1,200,30", "time_flow,0,0.25,5,2", "offset,0,0.1,1,0" ]
+
+[node name="Character" parent="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" instance=ExtResource( 1 )]
+position = Vector2( 115, 85 )
+scale = Vector2( 0.4, 0.4 )
+[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" method="_on_ease_manager_changed"]
+[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" method="_on_ease_manager_changed"]
+[connection signal="ease_manager_changed" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" method="_on_ease_manager_changed"]
+[connection signal="play_shaders" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager2" method="_on_play_shader"]
+[connection signal="play_shaders" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager" method="_on_play_shader"]
+[connection signal="play_shaders" from="CanvasLayer/VBoxContainer/EaseManager" to="CanvasLayer/VBoxContainer/ScrollContainer/HBoxContainer/ShaderManager3" method="_on_play_shader"]
