@@ -7,4 +7,5 @@ func _ready():
 	$Timer.start(frame_time)
 
 func _on_Timer_timeout():
+	return
 	frame = (frame + 1) % hframes

@@ -2,10 +2,22 @@ tool
 extends Control
 
 export (Array, String) var shader_uniforms = ["period,0.1,0.05,1,0.5"] setget _set_shader_uniforms
+export (ShaderMaterial) var shader_material setget _set_shader_material
+
+onready var character = $Spacer/Control/Character
 
 func _ready():
+	print(1)
+	_set_shader_material(shader_material)
+	print(2)
 	_set_shader_uniforms(shader_uniforms)
-	material.set_shader_param("intensity_time_offset", 0)
+	
+	shader_material.set_shader_param("intensity_time_offset", 0)
+
+func _set_shader_material(v):
+	shader_material = v
+	if character:
+		character.material = v
 	
 func _set_shader_uniforms(v):
 	shader_uniforms = v
@@ -47,12 +59,13 @@ func _set_shader_uniforms(v):
 		_on_shader_uniform_changed(slider.value, uniform_info[0], lblValue)
 
 func _on_shader_uniform_changed(value, uniform:String, lblValue:Label):
-	material.set_shader_param(uniform, value)
+	if shader_material:
+		shader_material.set_shader_param(uniform, value)
 	lblValue.text = str(value)
 
 func _on_ease_manager_changed(texture, duration):
-	material.set_shader_param("intensity_texture", texture)
-	material.set_shader_param("intensity_duration", duration)
+	shader_material.set_shader_param("intensity_texture", texture)
+	shader_material.set_shader_param("intensity_duration", duration)
 
 func _on_play_shader():
 	# Get absolute time since Engine start
@@ -61,7 +74,7 @@ func _on_play_shader():
 	var rollover = ProjectSettings.get_setting("rendering/limits/time/time_rollover_secs")
 	var time = fmod(OS.get_ticks_msec() / 1000.0, rollover)
 	
-	material.set_shader_param("intensity_time_offset", time)
+	shader_material.set_shader_param("intensity_time_offset", time)
 
 func _on_BtnSaveMaterial_pressed():
 	var fd:FileDialog = FileDialog.new()
@@ -77,5 +90,5 @@ func _on_BtnSaveMaterial_pressed():
 	
 func _on_save_material_file_selected(path):
 	var flags = ResourceSaver.FLAG_BUNDLE_RESOURCES | ResourceSaver.FLAG_CHANGE_PATH
-	if ResourceSaver.save(path, material, flags) != OK:
+	if ResourceSaver.save(path, shader_material, flags) != OK:
 		printerr("Could not save the material!")
